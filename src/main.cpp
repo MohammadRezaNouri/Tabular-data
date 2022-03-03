@@ -173,5 +173,23 @@ menu:
             goto menu;
         }
     }
+    else if (tokens[0] == "sort")
+    {
+        Bool = 0;
+        for (int i = 0; i < Table.size(); i++)
+            if (tokens[1] == Table[i]->getName())
+            {
+                Bool = 1;
+                Table[i]->sort(stoi(tokens[2]));
+                tokens.erase(tokens.begin(), tokens.end());
+                goto menu;
+            }
+        if (Bool == 0)
+        {
+            cerr << "There is no table with this name." << endl;
+            tokens.erase(tokens.begin(), tokens.end());
+            goto menu;
+        }
+    }
     return 0;
 }
