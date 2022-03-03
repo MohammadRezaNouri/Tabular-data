@@ -41,5 +41,33 @@ menu:
     for (int i = 0; i < tokens.size(); i++)
         transform(tokens[i].begin(), tokens[i].end(), tokens[i].begin(), [](unsigned char c)
                   { return tolower(c); });
+    if (tokens[0] == "create")
+    {
+        if (tokens.size() == 2)
+        {
+            cerr << "The number of columns is not entered." << endl;
+            tokens.erase(tokens.begin(), tokens.end());
+            goto menu;
+        }
+        for (int i = 0; i < Table.size(); i++)
+            if (tokens[1] == Table[i]->getName())
+            {
+                cerr << "Error: table " << tokens[1] << " alreasy exists." << endl;
+                tokens.erase(tokens.begin(), tokens.end());
+                goto menu;
+            }
+        try
+        {
+            Table.push_back(new table(tokens[1], tokens[2]));
+            tokens.erase(tokens.begin(), tokens.end());
+            goto menu;
+        }
+        catch (invalid_col &Err)
+        {
+            cerr << Err.what() << endl;
+            tokens.erase(tokens.begin(), tokens.end());
+            goto menu;
+        }
+    }
     return 0;
 }
