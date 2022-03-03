@@ -43,3 +43,21 @@ int table::getRow()
 {
     return row;
 }
+
+void table::insert(vector<string> tokens)
+{
+    float *temp = new float[row * col];
+    for (int i = 0; i < row * col; i++)
+        temp[i] = _table[i];
+    delete[] _table;
+    row++;
+    _table = new float[row * col];
+    for (int i = 0; i < (row - 1) * col; i++)
+        _table[i] = temp[i];
+    delete[] temp;
+    for (int i = (row - 1) * col, j = 2; i < col * row; i++, j++)
+        if (i == (row - 1) * col)
+            _table[i] = stof(tokens[j].substr(1));
+        else
+            _table[i] = stof(tokens[j]);
+}
