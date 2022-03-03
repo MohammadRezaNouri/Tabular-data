@@ -155,3 +155,85 @@ void table::sort(int check)
                     i = i - (col * 2);
             }
 }
+
+void table::statistics()
+{
+    float temp1, temp2;
+    vector<float> temp(row);
+    cout << "[min ] [";
+    for (int i = 0; i < col; i++)
+    {
+        for (int j = i, l = 0; j < col * row; j += col, l++)
+            temp[l] = _table[j];
+        temp1 = temp[0];
+        for (int m = 1; m < temp.size(); m++)
+            if (temp[m] < temp1)
+            {
+                temp1 = temp[m];
+                m -= 2;
+                if (m < -1)
+                    m = -1;
+            }
+        cout << temp1 << " ";
+    }
+    cout << '\b' << "]" << endl
+         << "[max ] [";
+    for (int i = 0; i < col; i++)
+    {
+        for (int j = i, l = 0; j < col * row; j += col, l++)
+            temp[l] = _table[j];
+        temp1 = temp[0];
+        for (int m = 1; m < temp.size(); m++)
+            if (temp[m] > temp1)
+            {
+                temp1 = temp[m];
+                m -= 2;
+                if (m < -1)
+                    m = -1;
+            }
+        cout << temp1 << " ";
+    }
+    cout << '\b' << "]" << endl
+         << "[sum ] [";
+    for (int i = 0; i < col; i++)
+    {
+        temp1 = 0;
+        for (int j = i, l = 0; j < col * row; j += col, l++)
+            temp1 += _table[j];
+        cout << temp1 << " ";
+    }
+    cout << '\b' << "]" << endl
+         << "[mean ] [";
+    for (int i = 0; i < col; i++)
+    {
+        temp1 = 0;
+        for (int j = i, l = 0; j < col * row; j += col, l++)
+            temp1 += _table[j];
+        cout << temp1 / row << " ";
+    }
+    cout << '\b' << "]" << endl
+         << "[var ] [";
+    for (int i = 0; i < col; i++)
+    {
+        temp1 = temp2 = 0;
+        for (int j = i, l = 0; j < col * row; j += col, l++)
+            temp1 += _table[j];
+        temp1 /= row;
+        for (int k = i; k < col * row; k += col)
+            temp2 += pow((_table[k] - temp1), 2);
+        cout << temp2 / row << " ";
+    }
+    cout << '\b' << "]" << endl
+         << "[std ] [";
+    for (int i = 0; i < col; i++)
+    {
+        temp1 = temp2 = 0;
+        for (int j = i, l = 0; j < col * row; j += col, l++)
+            temp1 += _table[j];
+        temp1 /= row;
+        for (int k = i; k < col * row; k += col)
+            temp2 += pow((_table[k] - temp1), 2);
+        cout << sqrt(temp2 / row) << " ";
+    }
+    cout << '\b' << "]" << endl;
+}
