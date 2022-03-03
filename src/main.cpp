@@ -233,5 +233,29 @@ menu:
             goto menu;
         }
     }
+    else if (tokens[0] == "import")
+    {
+        if (tokens.size() == 2)
+        {
+            cerr << "No name entered to search for file." << endl;
+            tokens.erase(tokens.begin(), tokens.end());
+            goto menu;
+        }
+        Bool = 0;
+        for (int i = 0; i < Table.size(); i++)
+            if (tokens[1] == Table[i]->getName())
+            {
+                Bool = 1;
+                Table[i]->import(tokens[2]);
+                tokens.erase(tokens.begin(), tokens.end());
+                goto menu;
+            }
+        if (Bool == 0)
+        {
+            cerr << "There is no table with this name." << endl;
+            tokens.erase(tokens.begin(), tokens.end());
+            goto menu;
+        }
+    }
     return 0;
 }
