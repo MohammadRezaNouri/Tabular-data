@@ -28,3 +28,18 @@ void table::setCol(string Col)
     for (int i = 1; i <= row; i++)
         _table[i - 1] = 0;
 }
+
+string table::getName()
+{
+    return name;
+}
+
+int table::getCol()
+{
+    return col;
+}
+
+int table::getRow()
+{
+    return row;
+}
