@@ -5,6 +5,12 @@
 #include <cmath>
 #include <fstream>
 
+table::table(string name, string col)
+{
+    setName(name);
+    setCol(col);
+}
+
 void table::setName(string Name)
 {
     name = Name;
