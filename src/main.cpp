@@ -132,5 +132,46 @@ menu:
             goto menu;
         }
     }
+    else if (tokens[0] == "merge")
+    {
+        Bool = 0;
+        for (int i = 0; i < Table.size(); i++)
+            if (tokens[1] == Table[i]->getName())
+            {
+                Bool = 1;
+                int Bool1 = 0;
+                for (int j = 0; j < Table.size(); j++)
+                    if (tokens[2] == Table[j]->getName())
+                    {
+                        Bool1 = 1;
+                        if (Table[i]->getCol() == Table[j]->getCol())
+                        {
+                            Table[i]->merge(*Table[j]);
+                            tokens.erase(tokens.begin(), tokens.end());
+                            goto menu;
+                        }
+                        else
+                        {
+                            cerr << "The columns of the tow tables are not equal." << endl;
+                            tokens.erase(tokens.begin(), tokens.end());
+                            goto menu;
+                        }
+                    }
+                if (Bool1 == 0)
+                {
+                    cerr << "No name was found for table number two in the database." << endl;
+                    tokens.erase(tokens.begin(), tokens.end());
+                    goto menu;
+                }
+                tokens.erase(tokens.begin(), tokens.end());
+                goto menu;
+            }
+        if (Bool == 0)
+        {
+            cerr << "No name found for table one in the database." << endl;
+            tokens.erase(tokens.begin(), tokens.end());
+            goto menu;
+        }
+    }
     return 0;
 }
