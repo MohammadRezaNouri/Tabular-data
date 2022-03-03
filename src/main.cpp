@@ -257,5 +257,23 @@ menu:
             goto menu;
         }
     }
+    else
+    {
+        cerr << "Command '" << tokens[0] << "' not found, ";
+        cout << "List of commands :" << endl;
+        cout << "create" << endl;
+        cout << "insert" << endl;
+        cout << "display" << endl;
+        cout << "drop" << endl;
+        cout << "merge" << endl;
+        cout << "sort" << endl;
+        cout << "statistics" << endl;
+        cout << "Export" << endl;
+        cout << "import" << endl;
+        cout << "exit" << endl;
+        cout << "clear" << endl;
+        tokens.erase(tokens.begin(), tokens.end());
+        goto menu;
+    }
     return 0;
 }
