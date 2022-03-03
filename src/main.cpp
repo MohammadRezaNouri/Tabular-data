@@ -34,5 +34,12 @@ menu:
         system("clear || cls");
         goto menu;
     }
+    stringstream check1(t1);
+    while (getline(check1, t1, ' '))
+        if (t1.size() != 0)
+            tokens.push_back(t1);
+    for (int i = 0; i < tokens.size(); i++)
+        transform(tokens[i].begin(), tokens[i].end(), tokens[i].begin(), [](unsigned char c)
+                  { return tolower(c); });
     return 0;
 }
