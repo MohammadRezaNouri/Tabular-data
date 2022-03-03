@@ -19,5 +19,20 @@ int main()
     chrono::seconds time(2);
     this_thread::sleep_for(time);
     cout << "Page cleaning = clear" << endl;
+menu:
+    cout << "> ";
+    getline(cin, t1);
+    if (t1 == "exit")
+    {
+        for (int i = 0; i < Table.size(); i++)
+            delete Table[i];
+        cout << "Bye" << endl;
+        return 0;
+    }
+    if (t1 == "clear")
+    {
+        system("clear || cls");
+        goto menu;
+    }
     return 0;
 }
