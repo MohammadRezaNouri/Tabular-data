@@ -69,5 +69,32 @@ menu:
             goto menu;
         }
     }
+    else if (tokens[0] == "insert")
+    {
+        Bool = 0;
+        for (int i = 0; i < Table.size(); i++)
+            if (tokens[1] == Table[i]->getName())
+            {
+                Bool = 1;
+                if (tokens.size() - 2 == Table[i]->getCol())
+                {
+                    Table[i]->insert(tokens);
+                    tokens.erase(tokens.begin(), tokens.end());
+                    goto menu;
+                }
+                else
+                {
+                    cerr << "The number of columns is not equal." << endl;
+                    tokens.erase(tokens.begin(), tokens.end());
+                    goto menu;
+                }
+            }
+        if (Bool == 0)
+        {
+            cerr << "There is no table with this name." << endl;
+            tokens.erase(tokens.begin(), tokens.end());
+            goto menu;
+        }
+    }
     return 0;
 }
