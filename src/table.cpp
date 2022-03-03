@@ -116,3 +116,18 @@ void table::drop(int rm, vector<string> tokens)
         }
     }
 }
+
+void table::merge(table add)
+{
+    float *temp = new float[row * col];
+    for (int i = 0; i < row * col; i++)
+        temp[i] = _table[i];
+    delete[] _table;
+    _table = new float[(row * col) + (add.getRow() * add.getCol())];
+    for (int i = 0; i < row * col; i++)
+        _table[i] = temp[i];
+    delete[] temp;
+    for (int i = row * col, j = 0; i < (row * col) + (add.getRow() * add.getCol()); i++, j++)
+        _table[i] = add._table[j];
+    row = add.getRow() + row;
+}
