@@ -61,3 +61,25 @@ void table::insert(vector<string> tokens)
         else
             _table[i] = stof(tokens[j]);
 }
+
+void table::display()
+{
+    if (row == 0)
+    {
+        cout << "This table has no data" << endl;
+        return;
+    }
+    cout << "table " << name << " with " << col << " columns and " << row << " rows" << endl;
+    for (int i = 0; i < row; i++)
+    {
+        cout << "[" << i << "] [";
+        for (int j = 0; j < (i * col) + col; j++)
+        {
+            cout << _table[j];
+            if (j == ((i * col) + col) - 1)
+                cout << "]" << endl;
+            else
+                cout << " ";
+        }
+    }
+}
