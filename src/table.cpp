@@ -237,3 +237,33 @@ void table::statistics()
     }
     cout << '\b' << "]" << endl;
 }
+
+void table::Export(string save)
+{
+    fstream tableFile(save, ios::app);
+    if (tableFile.fail())
+    {
+        cout << "File storage was a problem." << endl;
+        return;
+    }
+    if (row == 0)
+    {
+        tableFile << "table " << name << " with " << col << " columns and " << row << " rows" << endl;
+        return;
+    }
+    tableFile << "table " << name << " with " << col << " columns and " << row << " rows" << endl;
+    for (int i = 0; i < row; i++)
+    {
+        tableFile << '[' << i << "] [";
+        for (int j = 0; j < (i * col) + col; j++)
+        {
+            tableFile << _table[j];
+            if (j == ((i * col) + col) - 1)
+                tableFile << ']' << endl;
+            else
+                tableFile << ' ';
+        }
+    }
+    tableFile << endl;
+    tableFile.close();
+}
