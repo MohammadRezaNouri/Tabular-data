@@ -267,3 +267,39 @@ void table::Export(string save)
     tableFile << endl;
     tableFile.close();
 }
+
+void table::import(string read)
+{
+    string t1;
+    vector<string> tokens;
+    ifstream im(read, ios::in);
+    if (im.fail())
+        throw invalid_argument("There is no file with this name.");
+    getline(im, t1);
+    while (getline(im, t1, ' '))
+        if (t1.size() != 0)
+            tokens.push_back(t1);
+    im.close();
+    ifstream imp(read, ios::in);
+    if (imp.fail())
+        throw invalid_argument("There is no file with this name.");
+    getline(imp, t1);
+    if (stoi(t1.substr(14, 1)) != col)
+    {
+        cerr << "The number of columns in the table in the file is not equal to the column in this table." << endl;
+        return;
+    }
+    row = stoi(t1.substr(28, 1));
+    while (getline(imp, t1))
+    {
+        delete[] _table;
+        _table = new float[row * col];
+        for (int i = 0; i < col * row; i += col)
+            for (int k = i; k < col + i; k++)
+                if (i == k)
+                    _table[k] = stof(tokens[k + 1].substr(1));
+                else
+                    _table[k] = stof(tokens[k + 1]);
+    }
+    imp.close();
+}
