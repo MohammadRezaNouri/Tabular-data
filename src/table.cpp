@@ -303,3 +303,8 @@ void table::import(string read)
     }
     imp.close();
 }
+
+table::~table()
+{
+    delete[] _table;
+}
