@@ -131,3 +131,27 @@ void table::merge(table add)
         _table[i] = add._table[j];
     row = add.getRow() + row;
 }
+
+void table::sort(int check)
+{
+    if (check + 1 > col || check < 0)
+    {
+        cout << "The column in question does not exist." << endl;
+        return;
+    }
+    else
+        for (int i = check; i < (row * col) - col; i += col)
+            if (_table[i] > _table[i + col])
+            {
+                float *temp = new float[col];
+                for (int j = 0, k = i; j < col; j++, k++)
+                {
+                    temp[j] = _table[k - 1];
+                    _table[k - 1] = _table[k + col - 1];
+                    _table[k + col - 1] = temp[j];
+                }
+                delete[] temp;
+                if (i > col)
+                    i = i - (col * 2);
+            }
+}
