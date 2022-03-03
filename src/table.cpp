@@ -83,3 +83,36 @@ void table::display()
         }
     }
 }
+
+void table::drop(int rm, vector<string> tokens)
+{
+    if (rm == 2)
+    {
+        delete[] _table;
+        row = 0;
+        _table = new float[row];
+        for (int i = 1; i <= row; i++)
+            _table[i - 1] = 0;
+    }
+    else
+    {
+        if (stoi(tokens[2]) > row)
+        {
+            cout << "The row in question does not exist." << endl;
+            return;
+        }
+        else
+        {
+            for (int i = stoi(tokens[2]) * col; i < (row * col) - col; i++)
+                _table[i] = _table[i + col];
+            float *temp = new float[--row * col];
+            for (int i = 0; i < row * col; i++)
+                temp[i] = _table[i];
+            delete[] _table;
+            _table = new float[row * col];
+            for (int i = 0; i < row * col; i++)
+                _table[i] = temp[i];
+            delete[] temp;
+        }
+    }
+}
