@@ -1,4 +1,5 @@
 #include "table.h"
+#include "invalid_col.h"
 
 #include <vector>
 #include <cmath>
