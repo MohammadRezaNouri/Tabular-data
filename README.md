@@ -152,13 +152,13 @@ open the terminal and go to file directory with cd command and execute the follo
     ```
 
 ## Usage
-Your contributions are always welcome.
+Statistical analysis.
 
 ## In the future
 Become a graphic application.
 
 ## Contributing
-Statistical analysis.
+Your contributions are always welcome.
 
 ## Thanks to
 #### [Mr Amirabbas Asadi](https://github.com/amirabbasasadi)
